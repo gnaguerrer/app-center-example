@@ -5,9 +5,11 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Alert,
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -16,14 +18,9 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import Crashes from 'appcenter-crashes';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -62,6 +59,23 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const checkPreviousSession = async () => {
+    const didCrash = await Crashes.hasCrashedInLastSession();
+    if (didCrash) {
+      const report = await Crashes.lastSessionCrashReport();
+      Alert.alert(
+        'Crash',
+        "Sorry about that crash, we're working on a solution",
+      );
+    }
+  };
+
+  useEffect(() => {
+    checkPreviousSession();
+
+    return () => {};
+  }, []);
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -76,20 +90,9 @@ function App(): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
+          <Section title="App Center Exmaple">
+            <Button title="Crash" onPress={() => Crashes.generateTestCrash()} />
           </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
         </View>
       </ScrollView>
     </SafeAreaView>
