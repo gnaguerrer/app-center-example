@@ -19,7 +19,7 @@ import {
   View,
 } from 'react-native';
 import Crashes from 'appcenter-crashes';
-
+import Analytics from 'appcenter-analytics';
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 type SectionProps = PropsWithChildren<{
@@ -92,6 +92,10 @@ function App(): React.JSX.Element {
           }}>
           <Section title="App Center Exmaple">
             <Button title="Crash" onPress={() => Crashes.generateTestCrash()} />
+            <Button
+              title="Calculate inflation"
+              onPress={() => Analytics.trackEvent('custom Event')}
+            />
           </Section>
         </View>
       </ScrollView>
