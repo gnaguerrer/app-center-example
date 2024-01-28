@@ -19,4 +19,10 @@ yarn ios
 
 ## App Center
 
+### IOS
+
 [![Build status](https://build.appcenter.ms/v0.1/apps/656570ac-4d99-41c0-b20b-fc2c1f9ed0f5/branches/develop/badge)](https://appcenter.ms)
+
+### Android
+
+[![Build status](https://build.appcenter.ms/v0.1/apps/abac4066-32c3-460e-981a-d85ac7856d1e/branches/develop/badge)](https://appcenter.ms)
