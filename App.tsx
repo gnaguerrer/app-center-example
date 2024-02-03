@@ -169,7 +169,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   textBox: {
-    height: 30,
     borderColor: 'gray',
     borderWidth: 1,
     marginTop: 10,
